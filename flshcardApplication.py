@@ -1,38 +1,98 @@
 import random
+import webbrowser
 from tkinter import *
 from random import randint, randrange  # This will create random integers
 from tkinter import messagebox
 from PIL import ImageTk, Image
 
+
 root = Tk()
 root.title("Flashcard")
 root.geometry("630x400")
-root.iconphoto(True, PhotoImage(file="/home/soumyo/PycharmProjects/FlashcardApp/icon.png"))
+root.resizable(0, 0)
+root.iconphoto(True, PhotoImage(file="/home/soumyo/PycharmProjects/FlashcardApp/icons/icon.png"))
 
-my_label = Label(root, text="Select any card from menu", font=("Arial, 30"))
-my_label.pack(pady=120)
+# Add String Variable
+current_status = StringVar()
+current_status.set("Select any option")
 
 #####################
 # Creating Function #
 #####################
+
+################################################
+# Creating Callback function to open hyperlink #
+################################################
+
+def callback(url):
+    webbrowser.open_new(url)
 
 #################
 # About Section #
 #################
 
 def about_window():
-    new = Toplevel()
-    new.title("About")
-    new.geometry("400x400")
-    new.iconphoto(True, PhotoImage(file="/home/soumyo/PycharmProjects/FlashcardApp/about.png"))
+    root.iconify()
+    about = Toplevel()
+    about.title("About")
+    about.geometry("500x450")
+    about.iconphoto(True, PhotoImage(file="/home/soumyo/PycharmProjects/FlashcardApp/icons/about.png"))
+
+    # Creating About Frame
+    about_frame = Frame(about, width=400, height=400)
+    about_frame.pack(fill="both", expand=1)
+
+    # Adding Developer Image
+    dev_img = Image.open("/home/soumyo/PycharmProjects/FlashcardApp/images/about_profile_pic.jpg")
+    dev_img = dev_img.resize((150, 151), Image.ANTIALIAS)
+    DEV_IMG = ImageTk.PhotoImage(dev_img)
+    dev_img_label = Label(about_frame, image=DEV_IMG)
+    dev_img_label.grid(row=0, column=0, pady=30, padx=10, rowspan=2)
+
+    # Creating About Label
+    about_label1 = Label(about_frame, text="Soumyo Roy", font=("Noto Sans Medium", 20))
+    about_label1.grid(row=0, column=1, padx=10, sticky=W)
+
+    about_label2 = Label(about_frame, text="Student\nLoves to develop software and game.\nKrishnanagar, India.", font=("Noto Sans Medium", 12), justify=LEFT)
+    about_label2.grid(row=1, column=1, padx=10, columnspan=2, sticky=W)
+
+    about_label3 = Label(about_frame, text="Profiles :-", font=("Noto Sans Medium", 20))
+    about_label3.grid(row=2, column=0, sticky=W)
+
+    # Adding profile icons
+    fb_icon = Image.open("/home/soumyo/PycharmProjects/FlashcardApp/icons/fb.png")
+    fb_icon = fb_icon.resize((40, 40), Image.ANTIALIAS)
+    FB_ICON = ImageTk.PhotoImage(fb_icon)
+    fb_icon_label = Label(about_frame, image=FB_ICON, justify=LEFT, cursor="hand2")
+    fb_icon_label.grid(row=3, column=0, sticky=W, padx=40, pady=30)
+    fb_icon_label.bind("<Button-1>", lambda e: callback("https://www.facebook.com/soumyo.roy.31"))  # Creating Hyperlink
+
+    twitter_icon = Image.open("/home/soumyo/PycharmProjects/FlashcardApp/icons/twitter.png")
+    twitter_icon = twitter_icon.resize((60, 60), Image.ANTIALIAS)
+    TWITTER_ICON = ImageTk.PhotoImage(twitter_icon)
+    twitter_icon_label = Label(about_frame, image=TWITTER_ICON, justify=LEFT, cursor="hand2")
+    twitter_icon_label.grid(row=3, column=1, sticky=W, padx=10)
+    twitter_icon_label.bind("<Button-1>", lambda e: callback("https://twitter.com/RoySoumyo"))  # Creating Hyperlink
+
+    github_icon = Image.open("/home/soumyo/PycharmProjects/FlashcardApp/icons/github3png")
+    github_icon = github_icon.resize((64, 58), Image.ANTIALIAS)
+    GITHUB_ICON = ImageTk.PhotoImage(github_icon)
+    github_icon_label = Label(about_frame, image=GITHUB_ICON, justify=LEFT, cursor="hand2")
+    github_icon_label.grid(row=3, column=2, sticky=W)
+    github_icon_label.bind("<Button-1>", lambda e: callback("https://github.com/Soumyo78"))  # Creating Hyperlink
+
+    # Creating Close About Window Function
+    def close_about():
+        root.deiconify()
+        about.destroy()
+
+    # Adding Close Button
+    close_btn = Button(about_frame, text="Close", font=("Arial", 10), command=close_about)
+    close_btn.grid(row=4, column=0, columnspan=3, pady=40)
 
 
 
-
-
-
-
-    new.mainloop()
+    about.mainloop()
 
 #################
 # Close Program #
@@ -46,6 +106,59 @@ def quit_app():
     else:
         pass
 
+#######################
+# Start Page Function #
+#######################
+
+
+def start():
+    hide_frames()
+    start_frame.pack(fill="both", expand=1)
+    current_status.set("Select any option")
+
+    # Creating labels
+    start_label = Label(start_frame, text="Welcome to Flash Card Application\nPlease choose any card option", font=("Arial", 19))
+    start_label.grid(row=0, column=0, pady=40, padx=100, columnspan=2)  # This is start frame label
+
+    mathcard_label = Label(start_frame, text="Math Cards\n__________", font=("Times New Roman", 12))
+    mathcard_label.grid(row=1, column=0, pady=20, sticky=W, padx=100)
+
+    gkcard_label = Label(start_frame, text="General Knowledge Cards\n__________________________", font=("Times New Roman", 12))
+    gkcard_label.grid(row=1, column=1, pady=20)
+
+    # Add Integer Variable Function
+    global v
+    v = IntVar()
+    v.set(1)
+
+    # Creating Radio Buttons
+    rbutton1 = Radiobutton(start_frame, text="Addition", variable=v, value=1).grid(row=2, column=0, sticky=W, padx=100)
+    rbutton2 = Radiobutton(start_frame, text="Subtraction", variable=v, value=2).grid(row=3, column=0, sticky=W, padx=100)
+    rbutton3 = Radiobutton(start_frame, text="Multiplication", variable=v, value=3).grid(row=4, column=0, sticky=W, padx=100)
+    rbutton4 = Radiobutton(start_frame, text="Division", variable=v, value=4).grid(row=5, column=0, sticky=W, padx=100)
+    rbutton5 = Radiobutton(start_frame, text="State Capitals", variable=v, value=5).grid(row=2, column=1, sticky=W, padx=100)
+    rbutton6 = Radiobutton(start_frame, text="Country Capitals", variable=v, value=6).grid(row=3, column=1, sticky=W, padx=100)
+
+    # Creating Go Button
+    go_btn = Button(start_frame, text="Go", font=("Arial", 28), command=radio)
+    go_btn.grid(row=6, column=0, columnspan=2)
+
+
+##################################
+# Creating Radio Button Function #
+##################################
+
+
+def radio():
+    if v.get() == 1:
+        addition()
+    if v.get() == 2:
+        subtract()
+    if v.get() == 3:
+        multiply()
+    if v.get() == 4:
+        divide()
+
 ######################
 # Addition Operation #
 ######################
@@ -54,7 +167,6 @@ def quit_app():
 def add_correct(num1, num2):  # Checking the answer correct or not
     # Calculating the right answer
     correct = num1 + num2
-
     # Checking correct or wrong
     if int(addition_entry.get()) == correct:
         response2 = messagebox.showinfo("Result", "You are right the Correct Answer is " + str(correct) + "\n\nNow solve this next question")
@@ -73,6 +185,7 @@ def add_correct(num1, num2):  # Checking the answer correct or not
 def addition():  # Addition Function
     hide_frames()
     addition_frame.pack(fill="both", expand=1)
+    current_status.set("Solve Addition Problems")
 
     # Creating Random Integer Numbers
     global num_1
@@ -128,6 +241,7 @@ def subtract_correct(num1, num2):  # Checking the answer correct or not
 def subtract():  # Subtract Function
     hide_frames()
     subtract_frame.pack(fill="both", expand=1)
+    current_status.set("Solve Subtraction Problems")
 
     # Creating Random Integer Numbers
     global num_1
@@ -229,9 +343,11 @@ def division_correct(num1, num2):  # Checking the answer correct or not
         num_2.set(97)
     division_flash.config(text=str(num_1.get()) + " / " + str(num_2.get())+" =", font=("Arial", 32), bg="green", fg="black")
 
+
 def divide():  # Divide Function
     hide_frames()
     divide_frame.pack(fill="both", expand=1)
+    current_status.set("Solve Division Problems")
 
     # Creating Random Integer Numbers
     global num_1
@@ -336,6 +452,7 @@ def multiplication_correct(num1, num2):  # Checking the answer correct or not
 def multiply():  # Multiply Function
     hide_frames()
     multiply_frame.pack(fill="both", expand=1)
+    current_status.set("Solve Multiplication Problems")
 
     # Creating Random Integer Numbers
     global num_1
@@ -370,11 +487,22 @@ def multiply():  # Multiply Function
 
 
 def hide_frames():  # Creating a Hide Frame Function
+    for widget in addition_frame.winfo_children():
+        widget.destroy() # Destroying all the children under addition frame
+    for widget in subtract_frame.winfo_children():
+        widget.destroy()
+    for widget in divide_frame.winfo_children():
+        widget.destroy()
+    for widget in multiply_frame.winfo_children():
+        widget.destroy()
+    for widget in start_frame.winfo_children():
+        widget.destroy()
+
+    start_frame.pack_forget()
     addition_frame.pack_forget()
     subtract_frame.pack_forget()
     multiply_frame.pack_forget()
     divide_frame.pack_forget()
-    my_label.pack_forget()
 
 
 ##################
@@ -402,12 +530,18 @@ my_menu.add_cascade(label="About", menu=about_menu)
 # Creating About submenu
 about_menu.add_command(label="About Developer", command=about_window)
 
+# Creating General Knowledge submenu
+gk_menu.add_command(label="State Capitals")
+gk_menu.add_command(label="Country Capitals")
+
+
 # Creating Math submenu
 math_menu.add_command(label="Addition", command=addition)
-math_menu.add_command(label="Subtract", command=subtract)
-math_menu.add_command(label="Divide", command=divide)
-math_menu.add_command(label="Multiply", command=multiply)
+math_menu.add_command(label="Subtraction", command=subtract)
+math_menu.add_command(label="Division", command=divide)
+math_menu.add_command(label="Multiplication", command=multiply)
 math_menu.add_separator()
+math_menu.add_command(label="Start Page", command=start)
 math_menu.add_command(label="Exit", command=quit_app)
 
 ###################
@@ -419,5 +553,23 @@ addition_frame = Frame(root, width=400, height=400, bg="cyan")
 subtract_frame = Frame(root, width=400, height=400, bg="yellow")
 multiply_frame = Frame(root, width=400, height=400, bg="red")
 divide_frame = Frame(root, width=400, height=400, bg="green")
+
+# Creating Start Frame
+start_frame = Frame(root, width=400, height=400)
+
+########################
+# Calling Start Screen #
+########################
+
+start()
+
+######################
+# Creating StatusBar #
+######################
+
+# Add Status Label
+my_status = Label(root, textvariable=current_status, bd=2, relief="sunken", width=100, anchor=SW)
+my_status.pack(side=BOTTOM)
+
 
 root.mainloop()
