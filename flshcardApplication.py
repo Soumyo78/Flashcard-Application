@@ -8,7 +8,7 @@ from PIL import ImageTk, Image
 
 root = Tk()
 root.title("Flashcard")
-root.geometry("630x400")
+root.geometry("630x450")
 root.resizable(0, 0)
 root.iconphoto(True, PhotoImage(file="/home/soumyo/PycharmProjects/FlashcardApp/icons/icon.png"))
 
@@ -20,12 +20,14 @@ current_status.set("Select any option")
 # Creating Function #
 #####################
 
+
 ################################################
 # Creating Callback function to open hyperlink #
 ################################################
 
 def callback(url):
     webbrowser.open_new(url)
+
 
 #################
 # About Section #
@@ -74,7 +76,7 @@ def about_window():
     twitter_icon_label.grid(row=3, column=1, sticky=W, padx=10)
     twitter_icon_label.bind("<Button-1>", lambda e: callback("https://twitter.com/RoySoumyo"))  # Creating Hyperlink
 
-    github_icon = Image.open("/home/soumyo/PycharmProjects/FlashcardApp/icons/github3png")
+    github_icon = Image.open("/home/soumyo/PycharmProjects/FlashcardApp/icons/github3.png")
     github_icon = github_icon.resize((64, 58), Image.ANTIALIAS)
     GITHUB_ICON = ImageTk.PhotoImage(github_icon)
     github_icon_label = Label(about_frame, image=GITHUB_ICON, justify=LEFT, cursor="hand2")
@@ -170,7 +172,6 @@ def add_correct(num1, num2):  # Checking the answer correct or not
     # Checking correct or wrong
     if int(addition_entry.get()) == correct:
         response2 = messagebox.showinfo("Result", "You are right the Correct Answer is " + str(correct) + "\n\nNow solve this next question")
-
     else:
         response2 = messagebox.showerror("Result", "Your Answer is Incorrect\nThe Correct Answer is " + str(correct)+" , not "+str(addition_entry.get())+"\n\nNow solve this next question")
     # Clear the answer entry box
@@ -229,6 +230,7 @@ def subtract_correct(num1, num2):  # Checking the answer correct or not
 
     else:
         response2 = messagebox.showerror("Result", "Your Answer is Incorrect\nThe Correct Answer is " + str(correct)+" , not "+str(subtraction_entry.get())+"\n\nNow solve this next question")
+
     # Clear the answer entry box
     subtraction_entry.delete(0, "end")
 

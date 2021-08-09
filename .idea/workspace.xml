@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee3da841-b739-47a9-8d1f-ad9eaf8f7520" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/icons/about.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/fb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/github3png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/twitter.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/about.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/flshcardApplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/flshcardApplication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icon.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588602105216</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Status bar, New Start Page and other basic functionality is added.">
+      <created>1588773501822</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588773501822</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +138,7 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Modified" />
     <MESSAGE value="Basic Functionality Added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Functionality Added" />
+    <MESSAGE value="Status bar, New Start Page and other basic functionality is added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Status bar, New Start Page and other basic functionality is added." />
   </component>
 </project>
